@@ -1,14 +1,24 @@
 import React, { useEffect, useState } from "react";
+import { useDispatch } from "react-redux";
 import ProductCard from "../../components/ProductCard";
+import { useGetProductsQuery } from "../../features/api/apiSlice";
 
 const Home = () => {
-  const [products, setProducts] = useState([]);
+  const dispatch = useDispatch();
+  // const [products, setProducts] = useState([]);
 
-  useEffect(() => {
-    fetch("http://localhost:5000/products")
-      .then((res) => res.json())
-      .then((data) => setProducts(data.data));
-  }, []);
+  // useEffect(() => {
+  //   fetch("http://localhost:5000/products")
+  //     .then((res) => res.json())
+  //     .then((data) => setProducts(data.data));
+  // }, []);
+
+  const { data, isLoading, isSuccess, isError, error } = useGetProductsQuery();
+  const products = data?.data;
+
+  if (isLoading) {
+    return <p>Loading...</p>;
+  }
 
   const activeClass = "text-white  bg-indigo-500 border-white";
 
