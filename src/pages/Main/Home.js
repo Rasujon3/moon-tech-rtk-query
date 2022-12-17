@@ -13,10 +13,7 @@ const Home = () => {
   //     .then((data) => setProducts(data.data));
   // }, []);
 
-  const { data, isLoading, isSuccess, isError, error } = useGetProductsQuery(
-    null,
-    { refetchOnMountOrArgChange: true }
-  );
+  const { data, isLoading, isSuccess, isError, error } = useGetProductsQuery();
   const products = data?.data;
 
   if (isLoading) {
