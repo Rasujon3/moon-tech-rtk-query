@@ -20,6 +20,10 @@ const Home = () => {
     return <p>Loading...</p>;
   }
 
+  if (isError) {
+    return <p>Something went wrong</p>;
+  }
+
   const activeClass = "text-white  bg-indigo-500 border-white";
 
   return (
