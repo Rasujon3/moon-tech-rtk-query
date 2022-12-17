@@ -1,32 +1,8 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { useForm } from "react-hook-form";
-import { toast } from "react-hot-toast";
-import { useDispatch, useSelector } from "react-redux";
-import {
-  addProduct,
-  togglePostSuccess,
-} from "../../features/products/productsSlice";
 
 const AddProduct = () => {
-  const { register, handleSubmit, reset } = useForm();
-  const { isLoading, postSuccess, error, isError } = useSelector(
-    (state) => state.products
-  );
-  const dispatch = useDispatch();
-
-  useEffect(() => {
-    if (isLoading) {
-      toast.loading("Posting...", { id: "addPriduct" });
-    }
-    if (!isLoading && postSuccess) {
-      toast.success("Product added", { id: "addPriduct" });
-      dispatch(togglePostSuccess());
-      reset();
-    }
-    if (!isLoading && isError) {
-      toast.error(error, { id: "addPriduct" });
-    }
-  }, [isLoading, postSuccess, isError, error, reset, dispatch]);
+  const { register, handleSubmit } = useForm();
 
   const submit = (data) => {
     const product = {
@@ -43,7 +19,7 @@ const AddProduct = () => {
       spec: [],
     };
 
-    dispatch(addProduct(product));
+    console.log(product);
   };
 
   return (
@@ -76,7 +52,7 @@ const AddProduct = () => {
         </div>
         <div className="flex flex-col w-full max-w-xs">
           <label className="mb-2" htmlFor="price">
-            Price
+            Image
           </label>
           <input type="text" name="price" id="price" {...register("price")} />
         </div>
